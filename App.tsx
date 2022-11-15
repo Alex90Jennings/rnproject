@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Button, TextInput, FlatList } from 'react-native';
 import { useState } from 'react';
+import { GoalList } from './model'
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState<string>('')
-  const [goalsList, setGoalsList] = useState<object[]>([])
+  const [goalsList, setGoalsList] = useState<GoalList[]>([])
 
   function goalInputHandler(enteredText: string) {
     setEnteredGoalText(enteredText)
