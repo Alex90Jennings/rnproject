@@ -8,6 +8,8 @@ export interface GoalList {
 
 export interface GoalListProps {
     text: string,
+    id: string,
+    onDeleteItem: Function,
     style?: StyleProp<ViewStyle>
 }
 

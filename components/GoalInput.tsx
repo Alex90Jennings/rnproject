@@ -14,7 +14,6 @@ const GoalInput: React.FC<GoalInputProps> = (props) => {
         setEnteredGoalText('')
     }
     
-
     return (
         <View style={styles.inputContainer}>
             <TextInput style={styles.textInput} placeholder='Your course goal!' onChangeText={goalInputHandler} value={enteredGoalText}/>
