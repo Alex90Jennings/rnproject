@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Button } from 'react-native';
 import { useState } from 'react';
 import { GoalList } from './model'
 import GoalItem from './components/GoalItem';
@@ -6,10 +6,19 @@ import GoalInput from './components/GoalInput';
 
 export default function App() {
   const [goalsList, setGoalsList] = useState<GoalList[]>([])
+  const [modalIsVisible, setModalIsVisible] = useState<boolean>(false)
+
+  function startAddGoalHandler() {
+    setModalIsVisible(true)
+  }
+
+  function endAddGoalHandler() {
+    setModalIsVisible(false)
+  }
 
   function addGoalHandler(enteredGoalText: string) {
     setGoalsList((currentGoalsList) => [...currentGoalsList, {text: enteredGoalText, id: Math.random().toString()}])
-    console.log("goals list: ", goalsList)
+    endAddGoalHandler()
   }
 
   function deleteGoalHandler(id: string) {
@@ -20,7 +29,8 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title='Add New Goal' onPress={startAddGoalHandler}/>
+      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler}/>
       <View style={styles.goalsContainer}>
         <FlatList data={goalsList} alwaysBounceVertical={false} renderItem={itemData => {
           return <GoalItem text={itemData.item.text} id={itemData.item.id} onDeleteItem={deleteGoalHandler}/>
@@ -35,12 +45,16 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer: {
-    padding: 50,
+    flex: 1,
+    paddingTop: 50,
     paddingHorizontal: 16,
-    flex: 1
+    backgroundColor: "#e4d0ff"
   },
   goalsContainer: {
     flex: 3
   },
-
+  button: {
+    backgroundColor: '#e4d0ff',
+    color: "#400b73",
+  }
 });

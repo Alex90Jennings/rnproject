@@ -15,5 +15,7 @@ export interface GoalListProps {
 
 export interface GoalInputProps {
     onAddGoal: Function,
+    onCancel: Function,
+    visible: boolean,
     style?: StyleProp<ViewStyle>
 }

@@ -7,7 +7,7 @@ const GoalItem: React.FC<GoalListProps> = (props) => {
     }
 
     return (
-        <Pressable onPress={addDeleteHandler}>
+        <Pressable android_ripple={{color:'#210644'}} onPress={addDeleteHandler}>
             <View style={styles.goalList}>
                 <Text style={styles.goalListItem}>{props.text}</Text>
             </View>
@@ -18,13 +18,13 @@ const GoalItem: React.FC<GoalListProps> = (props) => {
 const styles = StyleSheet.create({
     goalList: {
         margin: 8,
-        padding: 8,
         borderRadius: 6,
         backgroundColor: '#5e0acc',
         color: 'white'
     },
     goalListItem: {
-    color: 'white'
+        padding: 8,
+        color: 'white'
     }
 })
 
