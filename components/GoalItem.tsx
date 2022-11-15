@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { GoalListProps } from '../model'
 
-const GoalItem: React.FC<GoalListProps> = (props: any) => {
+const GoalItem: React.FC<GoalListProps> = (props) => {
     return (
         <View style={styles.goalList}>
           <Text style={styles.goalListItem}>{props.text}</Text>
