@@ -1,8 +1,9 @@
-import { StyleSheet, View, FlatList, Button } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Pressable } from 'react-native';
 import { useState } from 'react';
 import { GoalList } from './model'
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [goalsList, setGoalsList] = useState<GoalList[]>([])
@@ -28,18 +29,23 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button title='Add New Goal' onPress={startAddGoalHandler}/>
-      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler}/>
-      <View style={styles.goalsContainer}>
-        <FlatList data={goalsList} alwaysBounceVertical={false} renderItem={itemData => {
-          return <GoalItem text={itemData.item.text} id={itemData.item.id} onDeleteItem={deleteGoalHandler}/>
-        }}
-        keyExtractor={(item, index) => {
-          return item.id
-        }}/>
+    <>
+      <StatusBar style={modalIsVisible ? "light" : "dark"} backgroundColor={modalIsVisible ? '#400b73' : '#e4d0ff'}/>
+      <View style={styles.appContainer}>
+        <Pressable onPress={startAddGoalHandler} style={styles.button}>
+            <Text style={styles.text}>Add New Goal</Text>
+        </Pressable>
+        <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler}/>
+        <View style={styles.goalsContainer}>
+          <FlatList data={goalsList} alwaysBounceVertical={false} renderItem={itemData => {
+            return <GoalItem text={itemData.item.text} id={itemData.item.id} onDeleteItem={deleteGoalHandler}/>
+          }}
+          keyExtractor={(item, index) => {
+            return item.id
+          }}/>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -48,13 +54,21 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 16,
-    backgroundColor: "#e4d0ff"
+    backgroundColor: '#e4d0ff'
   },
   goalsContainer: {
     flex: 3
   },
   button: {
-    backgroundColor: '#e4d0ff',
-    color: "#400b73",
+    backgroundColor: '#400b73',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 12
+  },
+  text: {
+    color: "white",
+    fontSize: 16
   }
 });

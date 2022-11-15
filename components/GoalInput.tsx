@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, Button, View, Modal, Image } from 'react-native'
+import { StyleSheet, TextInput, Text, Button, View, Modal, Image, Pressable } from 'react-native'
 import { useState } from 'react'
 import { GoalInputProps } from '../model'
 
@@ -22,13 +22,17 @@ const GoalInput: React.FC<GoalInputProps> = (props) => {
         <Modal visible={props.visible} animationType="slide">
             <View style={styles.inputContainer}>
                 <Image style={styles.image} source={require("../assets/images/zim.jpeg")}/>
-                <TextInput style={styles.textInput} placeholder='Your course goal!' onChangeText={goalInputHandler} value={enteredGoalText}/>
+                <TextInput style={styles.textInput} placeholder='Your ZIM goal!' onChangeText={goalInputHandler} value={enteredGoalText}/>
                 <View style={styles.buttonContainer}>
                     <View style={styles.button}>
-                        <Button title='Add Goal' onPress={addGoalHandler} color="5e0acc"/>
+                        <Pressable onPress={addGoalHandler} style={styles.pressable}>
+                            <Text style={styles.text}>Add Goal</Text>
+                        </Pressable>
                     </View>
                     <View style={styles.button}>
-                        <Button title='Cancel' onPress={endAddGoalHandler} color="f31282"/>   
+                        <Pressable onPress={endAddGoalHandler} style={styles.pressable}>
+                            <Text style={styles.text}>Cancel</Text>
+                        </Pressable>   
                     </View>
                 </View>
             </View>
@@ -65,6 +69,16 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         margin: 20
+    },
+    pressable: {
+        backgroundColor: '#e4d0ff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 6,
+        padding: 12
+    },
+    text: {
+        fontSize: 14
     }
 })
 
